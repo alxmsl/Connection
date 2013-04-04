@@ -561,7 +561,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
      */
     public function sismembers($key, $member) {
         try {
-            return $this->getRedis()->sIsMember($key);
+            return $this->getRedis()->sIsMember($key, $member);
         } catch (\RedisException $ex) {
             throw new ConnectException();
         }
