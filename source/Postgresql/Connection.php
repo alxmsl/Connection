@@ -110,6 +110,10 @@ final class Connection extends DbConnection {
      * @throws QueryException for other reasons
      */
     public function query($query, array $data = null) {
+        if (is_null($this->Resource)) {
+            $this->connect();
+        }
+
         if (!pg_connection_busy($this->Resource)) {
             $this->sendQuery($query, $data);
             $Result = pg_get_result($this->Resource);
