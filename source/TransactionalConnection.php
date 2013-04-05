@@ -28,7 +28,7 @@ abstract class TransactionalConnection extends AbstractConnection implements Tra
     /**
      * Complete query with transaction
      * @param string $query query string
-     * @return AbstractQueryResult query result
+     * @return \Connection\Query\AbstractResult query result
      */
     public function querySafe($query) {
         if ($this->state === self::STATE_SHEDULED) {
@@ -85,9 +85,10 @@ abstract class TransactionalConnection extends AbstractConnection implements Tra
     /**
      * Complete query
      * @param string $query query string
-     * @return AbstractQueryResult query result
+     * @param array|null $data data for query parameters
+     * @return \Connection\Query\AbstractResult query result
      */
-    public abstract function query($query);
+    public abstract function query($query, array $data = null);
 
     /**
      * Start transaction implementation

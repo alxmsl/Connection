@@ -84,8 +84,24 @@ final class Connection extends DbConnection {
     }
 
     /**
+     * Send query with/without template
+     * @param string $query query string or template
+     * @param array|null $data query parameters
+     */
+    private function sendQuery($query, array $data = null) {
+        if (!is_null($data)) {
+            $Template = new QueryTemplate();
+            $Template->load($query);
+            pg_send_query($this->Resource, $Template->parse($data));
+        } else {
+            pg_send_query($this->Resource, $query);
+        }
+    }
+
+    /**
      * Complete query
      * @param string $query query string
+     * @param array|null $data query parameters
      * @return QueryResult postgres query result
      * @throws DuplicateEntryException when entry was duplicated
      * @throws DuplicateTableException when table was duplicated
@@ -93,9 +109,9 @@ final class Connection extends DbConnection {
      * @throws UndefinedTableException when try to query undefined table
      * @throws QueryException for other reasons
      */
-    public function query($query) {
+    public function query($query, array $data = null) {
         if (!pg_connection_busy($this->Resource)) {
-            pg_send_query($this->Resource, $query);
+            $this->sendQuery($query, $data);
             $Result = pg_get_result($this->Resource);
             $Error = pg_result_error($Result);
             if (!empty($Error)) {

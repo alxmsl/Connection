@@ -2,14 +2,14 @@
 
 namespace Connection\Postgresql\Client;
 
-use Connection\AbstractQueryResult;
+use Connection\Query\AbstractResult;
 
 /**
  * Postgresql query result
  * @author alxmsl
  * @date 4/2/13
  */
-final class QueryResult extends AbstractQueryResult {
+final class QueryResult extends AbstractResult {
     /**
      * @param resource $Result query result resource
      */

@@ -25,3 +25,10 @@ $Connection->connect();
 $Result = $Connection->query('select * from "pg_class"');
 $Data = $Result->getResult();
 var_dump($Data[0]);
+
+// ..query data with parameters
+$Result = $Connection->query('select * from {{ tbl(table) }}', array(
+    'table' => 'pg_class',
+));
+$Data = $Result->getResult();
+var_dump($Data[1]);

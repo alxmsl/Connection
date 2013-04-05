@@ -20,15 +20,19 @@ final class Autoloader {
         'Connection\\AbstractConnection'            => 'AbstractConnection.php',
         'Connection\\TransactionalInterface'        => 'TransactionalInterface.php',
         'Connection\\TransactionalConnection'       => 'TransactionalConnection.php',
-        'Connection\\AbstractQueryResult'           => 'AbstractQueryResult.php',
         'Connection\\DbConnection'                  => 'DbConnection.php',
+
+        'Connection\\Query\\AbstractResult'         => 'Query/AbstractResult.php',
+        'Connection\\Query\\AbstractTemplate'       => 'Query/AbstractTemplate.php',
+        'Connection\\Query\\DbTemplate'             => 'Query/DbTemplate.php',
 
         'Connection\\Redis\\Client\\RedisInterface' => 'Redis/RedisInterface.php',
         'Connection\\Redis\\Client\\Connection'     => 'Redis/Connection.php',
         'Connection\\Redis\\RedisFactory'           => 'Redis/RedisFactory.php',
 
         'Connection\\Postgresql\\Client\\Connection'    => 'Postgresql/Connection.php',
-        'Connection\\Postgresql\\Client\\QueryResult'    => 'Postgresql/QueryResult.php',
+        'Connection\\Postgresql\\Client\\QueryResult'   => 'Postgresql/QueryResult.php',
+        'Connection\\Postgresql\\Client\\QueryTemplate' => 'Postgresql/QueryTemplate.php',
     );
 
     /**

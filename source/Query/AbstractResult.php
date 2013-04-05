@@ -1,13 +1,13 @@
 <?php
 
-namespace Connection;
+namespace Connection\Query;
 
 /**
  * Query result
  * @author alxmsl
  * @date 4/2/13
  */
-abstract class AbstractQueryResult {
+abstract class AbstractResult {
     /**
      * @var int affected rows counter
      */
