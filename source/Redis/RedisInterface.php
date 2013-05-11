@@ -269,4 +269,13 @@ interface RedisInterface {
      * @throws ConnectException exception on connection to redis instance
      */
     public function srem($key, $member);
+
+    /**
+     * Create difference set
+     * @param string $destination key for result set
+     * @param array $sources source keys
+     * @return int size of result set
+     * @throws RedisConnectException exception on connection to redis instance
+     */
+    public function sdiffstore($destination, array $sources);
 }
