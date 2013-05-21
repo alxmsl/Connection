@@ -41,7 +41,6 @@ final class Connection extends DbConnection {
         do {
             $count += 1;
             $this->Resource = pg_connect($this->getConnectionString());
-            var_dump($this->Resource);
             if ($this->Resource !== false) {
                 return true;
             }
