@@ -44,6 +44,14 @@ abstract class DbConnection extends TransactionalConnection {
     }
 
     /**
+     * Database name was set or not
+     * @return bool status was database name set or not
+     */
+    public function hasDatabase() {
+        return !empty($this->database);
+    }
+
+    /**
      * Database connection user password
      * @param string $password connection user password
      * @return DbConnection self
@@ -59,6 +67,14 @@ abstract class DbConnection extends TransactionalConnection {
      */
     public function getPassword() {
         return $this->password;
+    }
+
+    /**
+     * Database password was set or not
+     * @return bool status was database password set or not
+     */
+    public function hasPassword() {
+        return !empty($this->password);
     }
 
     /**

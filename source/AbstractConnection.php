@@ -11,22 +11,27 @@ use InvalidArgumentException;
  */
 abstract class AbstractConnection implements ConnectionInterface {
     /**
-     * @var string redis instance hostname
+     * Missing connection port constant
+     */
+    const MISSING_PORT = -1;
+
+    /**
+     * @var string instance hostname
      */
     private $host = '';
 
     /**
-     * @var int redis instance port
+     * @var int instance port
      */
-    private $port = -1;
+    private $port = self::MISSING_PORT;
 
     /**
-     * @var float redis instance connect timeout
+     * @var float instance connect timeout
      */
     private $connectTimeout = 0;
 
     /**
-     * @var int number of tries for connect to redis instance
+     * @var int number of tries for connect to instance
      */
     private $connectTries = 1;
 
@@ -121,6 +126,14 @@ abstract class AbstractConnection implements ConnectionInterface {
      */
     public function getPort() {
         return $this->port;
+    }
+
+    /**
+     * Instance has connection port or not
+     * @return bool has connection port or not
+     */
+    public function hasPort() {
+        return $this->port != self::MISSING_PORT;
     }
 
     /**

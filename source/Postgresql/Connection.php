@@ -41,6 +41,7 @@ final class Connection extends DbConnection {
         do {
             $count += 1;
             $this->Resource = pg_connect($this->getConnectionString());
+            var_dump($this->Resource);
             if ($this->Resource !== false) {
                 return true;
             }
@@ -73,13 +74,14 @@ final class Connection extends DbConnection {
      */
     private function getConnectionString() {
         $parameters = array(
-            'host=' . $this->getHost(),
-            'port=' . $this->getPort(),
-            'connect_timeout=' . $this->getConnectTimeout(),
-            'user=' . $this->getUserName(),
-            'password=' . $this->getPassword(),
-            'dbname=' . $this->getDatabase(),
+            'host='             . $this->getHost(),
+            'connect_timeout='  . $this->getConnectTimeout(),
+            'user='             . $this->getUserName(),
         );
+        $this->hasPort()        && $parameters[] = 'port='      . $this->getPort();
+        $this->hasPassword()    && $parameters[] = 'password='  . $this->getPassword();
+        $this->hasDatabase()    && $parameters[] = 'dbname='    . $this->getDatabase();
+
         return implode(' ', $parameters);
     }
 
