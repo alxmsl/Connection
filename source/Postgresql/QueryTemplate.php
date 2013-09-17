@@ -12,7 +12,7 @@ use Connection\Query\DbTemplate;
 final class QueryTemplate extends DbTemplate {
     /**
      * Escape string parameters
-     * @param string $value value
+     * @param mixed $value value
      * @return string escaped value
      */
     public function str($value) {
@@ -20,8 +20,17 @@ final class QueryTemplate extends DbTemplate {
     }
 
     /**
+     * Escape integer value
+     * @param mixed $value query value
+     * @return int query value as an integer
+     */
+    public function int($value) {
+        return (int) $value;
+    }
+
+    /**
      * Escape tables
-     * @param string $table table name
+     * @param mixed $table table name
      * @return string escaped table name
      */
     public function tbl($table) {
