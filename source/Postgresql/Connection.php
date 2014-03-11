@@ -17,7 +17,8 @@ final class Connection extends DbConnection {
      */
     const   CODE_DUPLICATE_ENTRY = '23505',
             CODE_UNDEFINED_TABLE = '42P01',
-            CODE_DUPLICATE_TABLE = '42P07';
+            CODE_DUPLICATE_TABLE = '42P07',
+            CODE_DUPLICATE_TYPE  = '42710';
 
     /**
      * Postgres queries
@@ -129,6 +130,8 @@ final class Connection extends DbConnection {
                         throw new UndefinedTableException($errorMessage);
                     case self::CODE_DUPLICATE_TABLE:
                         throw new DuplicateTableException($errorMessage);
+                    case self::CODE_DUPLICATE_TYPE:
+                        throw new DuplicateTypeException($errorMessage);
                     default:
                         throw new QueryException($errorMessage . ':' . $query, $errorCode);
                 }
@@ -201,3 +204,8 @@ final class UndefinedTableException extends QueryException {}
  * Table was duplicate exception
  */
 final class DuplicateTableException extends QueryException {}
+
+/**
+ * Type was duplicate exception
+ */
+final class DuplicateTypeException extends QueryException {}
