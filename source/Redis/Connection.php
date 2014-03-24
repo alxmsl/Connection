@@ -590,7 +590,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
      */
     public function srem($key, $member) {
         try {
-            return $this->getRedis()->sRem($key);
+            return $this->getRedis()->sRem($key, $member);
         } catch (\RedisException $ex) {
             throw new ConnectException();
         }
@@ -601,7 +601,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
      * @param string $destination key for result set
      * @param array $sources source keys
      * @return int size of result set
-     * @throws RedisConnectException exception on connection to redis instance
+     * @throws ConnectException exception on connection to redis instance
      */
     public function sdiffstore($destination, array $sources) {
         try {
@@ -609,6 +609,60 @@ final class Connection extends AbstractConnection implements RedisInterface {
                 $this->getRedis(),
                 'sDiffStore',
             ), array_merge(array($destination), $sources));
+        } catch (\RedisException $ex) {
+            throw new ConnectException();
+        }
+    }
+
+    /**
+     * Append value to a list
+     * @param string $key key
+     * @param mixed $member list member
+     * @return int list length
+     */
+    public function rpush($key, $member) {
+        try {
+            return $this->getRedis()->rPush($key, $member);
+        } catch (\RedisException $ex) {
+            throw new ConnectException();
+        }
+    }
+
+    /**
+     * Remove and get the last element in a list
+     * @param string $key key
+     * @return mixed last element from a list
+     */
+    public function rpop($key) {
+        try {
+            return $this->getRedis()->rPop($key);
+        } catch (\RedisException $ex) {
+            throw new ConnectException();
+        }
+    }
+
+    /**
+     * Prepend one or multiple values to a list
+     * @param string $key key
+     * @param mixed $member list member
+     * @return int list length
+     */
+    public function lpush($key, $member) {
+        try {
+            return $this->getRedis()->lPush($key, $member);
+        } catch (\RedisException $ex) {
+            throw new ConnectException();
+        }
+    }
+
+    /**
+     * Remove and get the first element in a list
+     * @param string $key key
+     * @return mixed first element from a list
+     */
+    public function lpop($key) {
+        try {
+            return $this->getRedis()->lPop($key);
         } catch (\RedisException $ex) {
             throw new ConnectException();
         }

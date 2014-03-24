@@ -275,7 +275,37 @@ interface RedisInterface {
      * @param string $destination key for result set
      * @param array $sources source keys
      * @return int size of result set
-     * @throws RedisConnectException exception on connection to redis instance
+     * @throws ConnectException exception on connection to redis instance
      */
     public function sdiffstore($destination, array $sources);
+
+    /**
+     * Append value to a list
+     * @param string $key key
+     * @param mixed $member list member
+     * @return int list length
+     */
+    public function rpush($key, $member);
+
+    /**
+     * Remove and get the last element in a list
+     * @param string $key key
+     * @return mixed last element from a list
+     */
+    public function rpop($key);
+
+    /**
+     * Prepend one or multiple values to a list
+     * @param string $key key
+     * @param mixed $member list member
+     * @return int list length
+     */
+    public function lpush($key, $member);
+
+    /**
+     * Remove and get the first element in a list
+     * @param string $key key
+     * @return mixed first element from a list
+     */
+    public function lpop($key);
 }
