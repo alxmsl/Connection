@@ -308,4 +308,12 @@ interface RedisInterface {
      * @return mixed first element from a list
      */
     public function lpop($key);
+
+    /**
+     * Publish message to channel
+     * @param string $channel channel name
+     * @param string $message message
+     * @return int the number of clients that received the message
+     */
+    public function publish($channel, $message);
 }

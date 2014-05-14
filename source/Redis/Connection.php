@@ -2,8 +2,9 @@
 
 namespace Connection\Redis\Client;
 
-use Connection\AbstractConnection,
-    Exception;
+use Connection\AbstractConnection;
+use Exception;
+use RedisException;
 
 /**
  * Class for redis client
@@ -49,7 +50,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
                 } else {
                     $result = $this->Redis->connect($this->getHost(), $this->getPort(), $this->getConnectTimeout());
                 }
-            } catch (\RedisException $ex) {
+            } catch (RedisException $ex) {
                 throw new ConnectException();
             }
             if ($result === true) {
@@ -93,7 +94,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
                 return $result;
             }
             throw new ImpossibleValueException();
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -115,7 +116,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
                 return $result;
             }
             throw new ImpossibleValueException();
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -134,7 +135,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
                 return $result;
             }
             throw new ImpossibleValueException();
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -153,7 +154,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
                 throw new KeyNotFoundException();
             }
             return $result;
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -171,7 +172,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
                 return array_combine($keys, $result);
             }
             throw new ImpossibleValueException();
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -193,7 +194,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
                 return $result;
             }
             throw new ImpossibleValueException();
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -207,7 +208,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function mset(array $values) {
         try {
             return $this->getRedis()->mset($values);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -222,7 +223,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function setnx($key, $value) {
         try {
             return $this->getRedis()->setnx($key, $value);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -236,7 +237,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function msetnx(array $values) {
         try {
             return $this->getRedis()->msetnx($values);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -251,7 +252,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function getset($key, $value) {
         try {
             return $this->getRedis()->getSet($key, $value);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -269,7 +270,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
                 return $result;
             }
             throw new ImpossibleValueException();
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -283,7 +284,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function exists($key) {
         try {
             return $this->getRedis()->exists($key);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -298,7 +299,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function rename($source, $destination) {
         try {
             return $this->getRedis()->rename($source, $destination);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -313,7 +314,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function renamenx($source, $destination) {
         try {
             return $this->getRedis()->renamenx($source, $destination);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -331,7 +332,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
                 return $result;
             }
             throw new ImpossibleValueException();
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -346,7 +347,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function expire($key, $timeout) {
         try {
             return $this->getRedis()->pexpire($key, $timeout);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -361,7 +362,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function expireat($key, $timestamp) {
         try {
             return $this->getRedis()->expireat($key, $timestamp);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -376,7 +377,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
         try {
             $result = $this->getRedis()->pttl($key);
             return ($result != -1) ? $result : false;
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -390,7 +391,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function persist($key) {
         try {
             return $this->getRedis()->persist($key);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -410,7 +411,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
                 return $result;
             }
             throw new ImpossibleValueException();
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -432,7 +433,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
                 return $result;
             }
             throw new ImpossibleValueException();
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -459,7 +460,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
                 return $result;
             }
             throw new ScriptExecutionException($lastError);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -486,7 +487,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
                 return $result;
             }
             throw new ScriptExecutionException($lastError);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -505,7 +506,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
                 return $result;
             }
             throw new ImpossibleValueException();
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -519,7 +520,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function spop($key) {
         try {
             return $this->getRedis()->sPop($key);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -533,7 +534,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function srandmember($key) {
         try {
             return $this->getRedis()->sRandMember($key);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -547,7 +548,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function scard($key) {
         try {
             return $this->getRedis()->sCard($key);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -562,7 +563,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function sismembers($key, $member) {
         try {
             return $this->getRedis()->sIsMember($key, $member);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -576,7 +577,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function smembers($key) {
         try {
             return $this->getRedis()->sMembers($key);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -591,7 +592,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function srem($key, $member) {
         try {
             return $this->getRedis()->sRem($key, $member);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -609,7 +610,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
                 $this->getRedis(),
                 'sDiffStore',
             ), array_merge(array($destination), $sources));
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -623,7 +624,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function rpush($key, $member) {
         try {
             return $this->getRedis()->rPush($key, $member);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -636,7 +637,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function rpop($key) {
         try {
             return $this->getRedis()->rPop($key);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -650,7 +651,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function lpush($key, $member) {
         try {
             return $this->getRedis()->lPush($key, $member);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
@@ -663,7 +664,21 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function lpop($key) {
         try {
             return $this->getRedis()->lPop($key);
-        } catch (\RedisException $ex) {
+        } catch (RedisException $ex) {
+            throw new ConnectException();
+        }
+    }
+
+    /**
+     * Publish message to channel
+     * @param string $channel channel name
+     * @param string $message message
+     * @return int the number of clients that received the message
+     */
+    public function publish($channel, $message) {
+        try {
+            return $this->getRedis()->publish($channel, $message);
+        } catch (RedisException $ex) {
             throw new ConnectException();
         }
     }
