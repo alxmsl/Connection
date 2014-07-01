@@ -104,6 +104,7 @@ final class Connection extends DbConnection {
      * Complete query
      * @param string $query query string
      * @param array|null $data query parameters
+     * @param bool $panic throw exception when connection is busy
      * @return QueryResult postgres query result
      * @throws DuplicateEntryException when entry was duplicated
      * @throws DuplicateTableException when table was duplicated
@@ -111,12 +112,13 @@ final class Connection extends DbConnection {
      * @throws UndefinedTableException when try to query undefined table
      * @throws QueryException for other reasons
      */
-    public function query($query, array $data = null) {
+    public function query($query, array $data = null, $panic = true) {
         if (is_null($this->Resource)) {
             $this->connect();
         }
 
-        if (!pg_connection_busy($this->Resource)) {
+        $isBusyConnection = pg_connection_busy($this->Resource);
+        if (!($isBusyConnection && $panic)) {
             $this->sendQuery($query, $data);
             $Result = pg_get_result($this->Resource);
             $Error = pg_result_error($Result);
