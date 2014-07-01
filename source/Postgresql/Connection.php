@@ -149,21 +149,21 @@ final class Connection extends DbConnection {
      * Start transaction implementation
      */
     public function begin() {
-        $this->query(self::SQL_QUERY_BEGIN);
+        $this->query(self::SQL_QUERY_BEGIN, null, false);
     }
 
     /**
      * Accept transaction implementation
      */
     public function commit() {
-        $this->query(self::SQL_QUERY_COMMIT);
+        $this->query(self::SQL_QUERY_COMMIT, null, false);
     }
 
     /**
      * Cancel transaction implementation
      */
     public function rollback() {
-        $this->query(self::SQL_QUERY_ROLLBACK);
+        $this->query(self::SQL_QUERY_ROLLBACK, null, false);
     }
 }
 
