@@ -11,6 +11,6 @@
     ],
     "minimum-stability": "dev",
     "autoload": {
-        "psr-4": {"alxmsl\\Connection\\": "source/"}
+        "psr-4": {"alxmsl\\Cli\\": "source/"}
     }
 }
