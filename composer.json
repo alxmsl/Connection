@@ -1,0 +1,16 @@
+{
+    "name": "alxmsl/connection",
+    "version": "1.0.0",
+    "description": "Simple library for support storage connections",
+    "license": "WTFPL",
+    "authors": [
+        {
+            "name": "alxmsl",
+            "email": "alexey.y.maslov@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {"alxmsl\\Connection\\": "source/"}
+    }
+}

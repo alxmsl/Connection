@@ -1,9 +1,16 @@
 <?php
+/*
+ * This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://www.wtfpl.net/ for more details.
+ */
 
-namespace Connection;
+namespace alxmsl\Connection;
 
 // append Connection autoloader
-spl_autoload_register(array('\Connection\Autoloader', 'autoload'));
+spl_autoload_register(array('alxmsl\Connection\Autoloader', 'autoload'));
 
 /**
  * Base class
@@ -15,24 +22,43 @@ final class Autoloader {
      * @var array array of available classes
      */
     private static $classes = array(
-        'Connection\\Autoloader'                    => 'Autoloader.php',
-        'Connection\\ConnectionInterface'           => 'ConnectionInterface.php',
-        'Connection\\AbstractConnection'            => 'AbstractConnection.php',
-        'Connection\\TransactionalInterface'        => 'TransactionalInterface.php',
-        'Connection\\TransactionalConnection'       => 'TransactionalConnection.php',
-        'Connection\\DbConnection'                  => 'DbConnection.php',
+        'alxmsl\\Connection\\Autoloader'              => 'Autoloader.php',
+        'alxmsl\\Connection\\ConnectionInterface'     => 'ConnectionInterface.php',
+        'alxmsl\\Connection\\AbstractConnection'      => 'AbstractConnection.php',
+        'alxmsl\\Connection\\TransactionalInterface'  => 'TransactionalInterface.php',
+        'alxmsl\\Connection\\TransactionalConnection' => 'TransactionalConnection.php',
+        'alxmsl\\Connection\\DbConnection'            => 'DbConnection.php',
+        'alxmsl\\Connection\\Exception\\DbException'  => 'Exception/DbException.php',
 
-        'Connection\\Query\\AbstractResult'         => 'Query/AbstractResult.php',
-        'Connection\\Query\\AbstractTemplate'       => 'Query/AbstractTemplate.php',
-        'Connection\\Query\\DbTemplate'             => 'Query/DbTemplate.php',
+        'alxmsl\\Connection\\Query\\AbstractResult'   => 'Query/AbstractResult.php',
+        'alxmsl\\Connection\\Query\\AbstractTemplate' => 'Query/AbstractTemplate.php',
+        'alxmsl\\Connection\\Query\\DbTemplate'       => 'Query/DbTemplate.php',
 
-        'Connection\\Redis\\Client\\RedisInterface' => 'Redis/RedisInterface.php',
-        'Connection\\Redis\\Client\\Connection'     => 'Redis/Connection.php',
-        'Connection\\Redis\\RedisFactory'           => 'Redis/RedisFactory.php',
+        'alxmsl\\Connection\\Redis\\Exception\\PhpRedisException'           => 'Redis/Exception/PhpRedisException.php',
+        'alxmsl\\Connection\\Redis\\Exception\\ConnectException'            => 'Redis/Exception/ConnectException.php',
+        'alxmsl\\Connection\\Redis\\Exception\\ImpossibleValueException'    => 'Redis/Exception/ImpossibleValueException.php',
+        'alxmsl\\Connection\\Redis\\Exception\\KeyNotFoundException'        => 'Redis/Exception/KeyNotFoundException.php',
+        'alxmsl\\Connection\\Redis\\Exception\\RedisNotConfiguredException' => 'Redis/Exception/RedisNotConfiguredException.php',
+        'alxmsl\\Connection\\Redis\\Exception\\ScriptExecutionException'    => 'Redis/Exception/ScriptExecutionException.php',
+        'alxmsl\\Connection\\Redis\\Exception\\TriesOverConnectException'   => 'Redis/Exception/TriesOverConnectException.php',
 
-        'Connection\\Postgresql\\Client\\Connection'    => 'Postgresql/Connection.php',
-        'Connection\\Postgresql\\Client\\QueryResult'   => 'Postgresql/QueryResult.php',
-        'Connection\\Postgresql\\Client\\QueryTemplate' => 'Postgresql/QueryTemplate.php',
+        'alxmsl\\Connection\\Redis\\RedisInterface' => 'Redis/RedisInterface.php',
+        'alxmsl\\Connection\\Redis\\Connection'     => 'Redis/Connection.php',
+        'alxmsl\\Connection\\Redis\\RedisFactory'   => 'Redis/RedisFactory.php',
+
+        'alxmsl\\Connection\\Postgresql\\Exception\\PostgresException'         => 'Postgresql/Exception/PostgresException.php',
+        'alxmsl\\Connection\\Postgresql\\Exception\\ConnectException'          => 'Postgresql/Exception/ConnectException.php',
+        'alxmsl\\Connection\\Postgresql\\Exception\\ConnectionBusyException'   => 'Postgresql/Exception/ConnectionBusyException.php',
+        'alxmsl\\Connection\\Postgresql\\Exception\\DuplicateEntryException'   => 'Postgresql/Exception/DuplicateEntryException.php',
+        'alxmsl\\Connection\\Postgresql\\Exception\\DuplicateTableException'   => 'Postgresql/Exception/DuplicateTableException.php',
+        'alxmsl\\Connection\\Postgresql\\Exception\\DuplicateTypeException'    => 'Postgresql/Exception/DuplicateTypeException.php',
+        'alxmsl\\Connection\\Postgresql\\Exception\\QueryException'            => 'Postgresql/Exception/QueryException.php',
+        'alxmsl\\Connection\\Postgresql\\Exception\\TriesOverConnectException' => 'Postgresql/Exception/TriesOverConnectException.php',
+        'alxmsl\\Connection\\Postgresql\\Exception\\UndefinedTableException'   => 'Postgresql/Exception/UndefinedTableException.php',
+
+        'alxmsl\\Connection\\Postgresql\\Connection'    => 'Postgresql/Connection.php',
+        'alxmsl\\Connection\\Postgresql\\QueryResult'   => 'Postgresql/QueryResult.php',
+        'alxmsl\\Connection\\Postgresql\\QueryTemplate' => 'Postgresql/QueryTemplate.php',
     );
 
     /**

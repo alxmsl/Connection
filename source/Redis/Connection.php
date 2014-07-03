@@ -1,9 +1,20 @@
 <?php
+/*
+ * This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://www.wtfpl.net/ for more details.
+ */
 
-namespace Connection\Redis\Client;
-
-use Connection\AbstractConnection;
-use Exception;
+namespace alxmsl\Connection\Redis;
+use alxmsl\Connection\AbstractConnection;
+use alxmsl\Connection\Redis\Exception\ConnectException;
+use alxmsl\Connection\Redis\Exception\ImpossibleValueException;
+use alxmsl\Connection\Redis\Exception\KeyNotFoundException;
+use alxmsl\Connection\Redis\Exception\RedisNotConfiguredException;
+use alxmsl\Connection\Redis\Exception\ScriptExecutionException;
+use alxmsl\Connection\Redis\Exception\TriesOverConnectException;
 use RedisException;
 
 /**
@@ -683,11 +694,3 @@ final class Connection extends AbstractConnection implements RedisInterface {
         }
     }
 }
-
-class PhpRedisException extends Exception {}
-class ConnectException extends PhpRedisException {}
-final class TriesOverConnectException extends ConnectException {}
-final class RedisNotConfiguredException extends PhpRedisException {}
-final class KeyNotFoundException extends PhpRedisException {}
-final class ScriptExecutionException extends PhpRedisException {}
-final class ImpossibleValueException extends PhpRedisException {}

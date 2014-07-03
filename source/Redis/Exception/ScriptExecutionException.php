@@ -7,11 +7,12 @@
  * http://www.wtfpl.net/ for more details.
  */
 
-namespace alxmsl\Connection\Query;
+namespace alxmsl\Connection\Redis\Exception;
 
 /**
- * Template for databases
+ * Exception for script execution errors
  * @author alxmsl
- * @date 4/6/13
- */
-class DbTemplate extends AbstractTemplate { }
+ * @date 7/3/14
+ */ 
+final class ScriptExecutionException extends PhpRedisException {}
+ 

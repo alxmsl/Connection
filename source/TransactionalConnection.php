@@ -1,6 +1,14 @@
 <?php
+/*
+ * This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://www.wtfpl.net/ for more details.
+ */
 
-namespace Connection;
+namespace alxmsl\Connection;
+use alxmsl\Connection\Query\AbstractResult;
 
 /**
  * Transactional connection abstraction
@@ -28,7 +36,7 @@ abstract class TransactionalConnection extends AbstractConnection implements Tra
     /**
      * Complete query with transaction
      * @param string $query query string
-     * @return \Connection\Query\AbstractResult query result
+     * @return AbstractResult query result
      */
     public function querySafe($query) {
         if ($this->state === self::STATE_SHEDULED) {
@@ -86,7 +94,7 @@ abstract class TransactionalConnection extends AbstractConnection implements Tra
      * Complete query
      * @param string $query query string
      * @param array|null $data data for query parameters
-     * @return \Connection\Query\AbstractResult query result
+     * @return AbstractResult query result
      */
     public abstract function query($query, array $data = null);
 

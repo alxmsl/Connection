@@ -7,11 +7,12 @@
  * http://www.wtfpl.net/ for more details.
  */
 
-namespace alxmsl\Connection\Query;
+namespace alxmsl\Connection\Redis\Exception;
 
 /**
- * Template for databases
+ * When Redis instance returns incorrect value
  * @author alxmsl
- * @date 4/6/13
- */
-class DbTemplate extends AbstractTemplate { }
+ * @date 7/3/14
+ */ 
+final class ImpossibleValueException extends PhpRedisException {}
+ 

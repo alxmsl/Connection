@@ -7,11 +7,13 @@
  * http://www.wtfpl.net/ for more details.
  */
 
-namespace alxmsl\Connection\Query;
+namespace alxmsl\Connection\Postgresql\Exception;
+use alxmsl\Connection\Exception\DbException;
 
 /**
- * Template for databases
+ * 
  * @author alxmsl
- * @date 4/6/13
- */
-class DbTemplate extends AbstractTemplate { }
+ * @date 7/3/14
+ */ 
+class PostgresException extends DbException {}
+ 
