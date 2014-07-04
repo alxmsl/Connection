@@ -1,7 +1,52 @@
 Connection
 =============
+Simple set of classes for support some connections. At this moment library supports:
 
+* redis connection over [phpredis](https://github.com/nicolasff/phpredis)
+* [postgresql](http://php.net/manual/en/intro.pgsql.php) connection
 
+Redis usage example
+-------
+
+    use alxmsl\Connection\Redis\RedisFactory;
+
+    // Create Redis Client instance with you configuration settings
+    $Redis = RedisFactory::createRedisByConfig(array(
+        'host' => 'localhost',
+        'port' => 6379,
+    ));
+
+    // Use Redis commands
+    $Redis->set('test', '7');
+    var_dump($Redis->get('test'));
+
+Postgres usage example
+-------
+
+    use alxmsl\Connection\Postgresql\Connection;
+
+    // Create connection
+    $Connection = new Connection();
+    $Connection->setUserName('postgres')
+        ->setPassword('postgres')
+        ->setDatabase('postgres')
+        ->setHost('localhost')
+        ->setPort(5432);
+
+    // Connect and ...
+    $Connection->connect();
+
+    // ..query needed data
+    $Result = $Connection->query('select * from "pg_class"', null, false);
+    $Data = $Result->getResult();
+    var_dump($Data[0]);
+
+    // ..query data with parameters
+    $Result = $Connection->query('select count(*) from {{ tbl(table) }}', array(
+        'table' => 'pg_class',
+    ), false);
+    $Data = $Result->getResult();
+    var_dump($Data);
 
 License
 -------
