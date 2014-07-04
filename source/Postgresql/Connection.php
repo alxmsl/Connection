@@ -26,22 +26,27 @@ final class Connection extends DbConnection {
     /**
      * Postgres error codes
      */
-    const   CODE_DUPLICATE_ENTRY = '23505',
-            CODE_UNDEFINED_TABLE = '42P01',
-            CODE_DUPLICATE_TABLE = '42P07',
-            CODE_DUPLICATE_TYPE  = '42710';
+    const CODE_DUPLICATE_ENTRY = '23505',
+          CODE_UNDEFINED_TABLE = '42P01',
+          CODE_DUPLICATE_TABLE = '42P07',
+          CODE_DUPLICATE_TYPE  = '42710';
 
     /**
      * Postgres queries
      */
-    const   SQL_QUERY_BEGIN     = 'BEGIN',
-            SQL_QUERY_COMMIT    = 'COMMIT',
-            SQL_QUERY_ROLLBACK  = 'ROLLBACK';
+    const SQL_QUERY_BEGIN    = 'BEGIN',
+          SQL_QUERY_COMMIT   = 'COMMIT',
+          SQL_QUERY_ROLLBACK = 'ROLLBACK';
 
     /**
      * @var resource connection resource
      */
     private $Resource = null;
+
+    /**
+     * @var bool need connection busy checkup
+     */
+    private $needBusyCheckup = false;
 
     /**
      * Connect to postgres instance
@@ -80,6 +85,24 @@ final class Connection extends DbConnection {
     }
 
     /**
+     * Setter connection busy checkup setting
+     * @param boolean $needBusyCheckup need connection busy checkup
+     * @return Connection connection instance
+     */
+    public function setNeedBusyCheckup($needBusyCheckup) {
+        $this->needBusyCheckup = (bool) $needBusyCheckup;
+        return $this;
+    }
+
+    /**
+     * Getter connection busy checkup setting
+     * @return boolean connection busy checkup
+     */
+    public function needBusyCheckup() {
+        return $this->needBusyCheckup;
+    }
+
+    /**
      * Build postgres connection string
      * @return string connection string
      */
@@ -115,7 +138,6 @@ final class Connection extends DbConnection {
      * Complete query
      * @param string $query query string
      * @param array|null $data query parameters
-     * @param bool $panic throw exception when connection is busy
      * @return QueryResult postgres query result
      * @throws DuplicateEntryException when entry was duplicated
      * @throws DuplicateTableException when table was duplicated
@@ -123,13 +145,16 @@ final class Connection extends DbConnection {
      * @throws UndefinedTableException when try to query undefined table
      * @throws QueryException for other reasons
      */
-    public function query($query, array $data = null, $panic = true) {
+    public function query($query, array $data = null) {
         if (is_null($this->Resource)) {
             $this->connect();
         }
 
-        $isBusyConnection = pg_connection_busy($this->Resource);
-        if (!($isBusyConnection && $panic)) {
+        $busy = false;
+        if ($this->needBusyCheckup()) {
+            $busy = pg_connection_busy($this->Resource);
+        }
+        if (!$busy) {
             $this->sendQuery($query, $data);
             $Result = pg_get_result($this->Resource);
             $Error = pg_result_error($Result);
