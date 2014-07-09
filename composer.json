@@ -1,6 +1,7 @@
 {
     "name": "alxmsl/connection",
     "description": "Simple library for support storage connections",
+    "keywords": ["redis", "postgres", "PostgreSQL"],
     "license": "WTFPL",
     "authors": [
         {
@@ -9,6 +10,7 @@
         }
     ],
     "support": {
+        "email": "alexey.y.maslov@gmail.com",
         "issues": "https://github.com/alxmsl/Connection/issues"
     },
     "autoload": {
