@@ -8,6 +8,9 @@
             "email": "alexey.y.maslov@gmail.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/alxmsl/Connection/issues"
+    },
     "autoload": {
         "psr-4": {"alxmsl\\Connection\\": "source/"}
     }
