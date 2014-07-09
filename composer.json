@@ -1,6 +1,5 @@
 {
     "name": "alxmsl/connection",
-    "version": "1.0.0",
     "description": "Simple library for support storage connections",
     "license": "WTFPL",
     "authors": [
