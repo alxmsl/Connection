@@ -8,7 +8,6 @@
             "email": "alexey.y.maslov@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {"alxmsl\\Connection\\": "source/"}
     }
