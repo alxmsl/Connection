@@ -347,4 +347,11 @@ interface RedisInterface {
      * @return bool transaction execution result
      */
     public function transaction(Closure $Commands, $mode = Redis::MULTI);
+
+    /**
+     * Return all keys matching the pattern
+     * @param string $pattern search pattern
+     * @return string[] found keys
+     */
+    public function keys($pattern);
 }

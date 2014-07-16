@@ -726,13 +726,30 @@ final class Connection extends AbstractConnection implements RedisInterface {
      * @return array|false transaction execution result or false on failure
      */
     public function transaction(Closure $Commands, $mode = Redis::MULTI) {
-        $Instance = $this->getRedis()->multi($mode);
-        $result = $Commands($Instance);
-        if ($result == true) {
-            return $Instance->exec();
-        } else {
-            $Instance->discard();
-            return false;
+        try {
+            $Instance = $this->getRedis()->multi($mode);
+            $result = $Commands($Instance);
+            if ($result == true) {
+                return $Instance->exec();
+            } else {
+                $Instance->discard();
+                return false;
+            }
+        } catch (RedisException $ex) {
+            throw new ConnectException();
+        }
+    }
+
+    /**
+     * Return all keys matching the pattern
+     * @param string $pattern search pattern
+     * @return string[] found keys
+     */
+    public function keys($pattern) {
+        try {
+            return $this->getRedis()->keys($pattern);
+        } catch (RedisException $ex) {
+            throw new ConnectException();
         }
     }
 }
