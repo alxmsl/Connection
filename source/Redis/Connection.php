@@ -693,4 +693,26 @@ final class Connection extends AbstractConnection implements RedisInterface {
             throw new ConnectException();
         }
     }
+
+    /**
+     * Flush current database
+     */
+    public function flushDatabase() {
+        try {
+            return $this->getRedis()->flushDB();
+        } catch (RedisException $ex) {
+            throw new ConnectException();
+        }
+    }
+
+    /**
+     * Flush all instance databases
+     */
+    public function flushInstance() {
+        try {
+            return $this->getRedis()->flushAll();
+        } catch (RedisException $ex) {
+            throw new ConnectException();
+        }
+    }
 }

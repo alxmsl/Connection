@@ -326,4 +326,14 @@ interface RedisInterface {
      * @return int the number of clients that received the message
      */
     public function publish($channel, $message);
+
+    /**
+     * Flush current database
+     */
+    public function flushDatabase();
+
+    /**
+     * Flush all instance databases
+     */
+    public function flushInstance();
 }
