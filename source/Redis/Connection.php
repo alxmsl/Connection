@@ -683,6 +683,24 @@ final class Connection extends AbstractConnection implements RedisInterface {
     }
 
     /**
+     * Returns list length
+     * @param string $key list key
+     * @throws ConnectException exception on connection to redis instance
+     * @throws ImpossibleValueException when found key is not a list
+     */
+    public function llen($key) {
+        try {
+            $length = $this->getRedis()->lLen($key);
+            if ($length === false) {
+                throw new ImpossibleValueException();
+            }
+            return $length;
+        } catch (RedisException $ex) {
+            throw new ConnectException();
+        }
+    }
+
+    /**
      * Publish message to channel
      * @param string $channel channel name
      * @param string $message message

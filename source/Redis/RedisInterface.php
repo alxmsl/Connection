@@ -9,6 +9,7 @@
 
 namespace alxmsl\Connection\Redis;
 use alxmsl\Connection\Redis\Exception\ConnectException;
+use alxmsl\Connection\Redis\Exception\ImpossibleValueException;
 use alxmsl\Connection\Redis\Exception\KeyNotFoundException;
 use alxmsl\Connection\Redis\Exception\ScriptExecutionException;
 use Closure;
@@ -320,6 +321,14 @@ interface RedisInterface {
      * @return mixed first element from a list
      */
     public function lpop($key);
+
+    /**
+     * Returns list length
+     * @param string $key list key
+     * @throws ConnectException exception on connection to redis instance
+     * @throws ImpossibleValueException when found key is not a list
+     */
+    public function llen($key);
 
     /**
      * Publish message to channel
