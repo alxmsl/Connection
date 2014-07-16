@@ -25,3 +25,13 @@ $Redis = RedisFactory::createRedisByConfig(array(
 // Use Redis commands
 $Redis->set('test', '7');
 var_dump($Redis->get('test'));
+
+// Use transactions
+$result = $Redis->transaction(function(Redis $Redis) {
+    $Redis->set('aaa', 7);
+    $Redis->set('bbb', 8);
+    $Redis->get('aaa');
+    $Redis->get('bbb');
+    return true;
+}, Redis::PIPELINE);
+var_dump($result);

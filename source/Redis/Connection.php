@@ -15,7 +15,9 @@ use alxmsl\Connection\Redis\Exception\KeyNotFoundException;
 use alxmsl\Connection\Redis\Exception\RedisNotConfiguredException;
 use alxmsl\Connection\Redis\Exception\ScriptExecutionException;
 use alxmsl\Connection\Redis\Exception\TriesOverConnectException;
+use Closure;
 use RedisException;
+use Redis;
 
 /**
  * Class for redis client
@@ -713,6 +715,24 @@ final class Connection extends AbstractConnection implements RedisInterface {
             return $this->getRedis()->flushAll();
         } catch (RedisException $ex) {
             throw new ConnectException();
+        }
+    }
+
+    /**
+     * Execute transaction method
+     * @param callable $Commands function, that have Redis instance as a first argument.
+     * Must returns boolean value for execute or discard all commands
+     * @param string $mode transaction mode
+     * @return array|false transaction execution result or false on failure
+     */
+    public function transaction(Closure $Commands, $mode = Redis::MULTI) {
+        $Instance = $this->getRedis()->multi($mode);
+        $result = $Commands($Instance);
+        if ($result == true) {
+            return $Instance->exec();
+        } else {
+            $Instance->discard();
+            return false;
         }
     }
 }

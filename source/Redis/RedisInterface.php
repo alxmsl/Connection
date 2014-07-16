@@ -11,6 +11,8 @@ namespace alxmsl\Connection\Redis;
 use alxmsl\Connection\Redis\Exception\ConnectException;
 use alxmsl\Connection\Redis\Exception\KeyNotFoundException;
 use alxmsl\Connection\Redis\Exception\ScriptExecutionException;
+use Closure;
+use Redis;
 
 /**
  * Redis commands interface
@@ -336,4 +338,13 @@ interface RedisInterface {
      * Flush all instance databases
      */
     public function flushInstance();
+
+    /**
+     * Execute transaction method
+     * @param callable $Commands function, that have Redis instance as a first argument.
+     * Must returns boolean value for execute or discard all commands
+     * @param string $mode transaction mode
+     * @return bool transaction execution result
+     */
+    public function transaction(Closure $Commands, $mode = Redis::MULTI);
 }
