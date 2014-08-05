@@ -770,4 +770,17 @@ final class Connection extends AbstractConnection implements RedisInterface {
             throw new ConnectException();
         }
     }
+
+    /**
+     * Select redis database
+     * @param int $database database number
+     * @return bool selection result
+     */
+    public function select($database) {
+        try {
+            return $this->getRedis()->select($database);
+        } catch (RedisException $ex) {
+            throw new ConnectException();
+        }
+    }
 }

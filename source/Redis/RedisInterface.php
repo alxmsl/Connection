@@ -363,4 +363,11 @@ interface RedisInterface {
      * @return string[] found keys
      */
     public function keys($pattern);
+
+    /**
+     * Select redis database
+     * @param int $database database number
+     * @return bool selection result
+     */
+    public function select($database);
 }
