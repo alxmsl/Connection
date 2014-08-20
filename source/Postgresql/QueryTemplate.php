@@ -36,6 +36,15 @@ final class QueryTemplate extends DbTemplate {
     }
 
     /**
+     * Escape boolean value
+     * @param mixed $value query value
+     * @return string query value as an boolean
+     */
+    public function bool($value) {
+        return $value ? 'true' : 'false';
+    }
+
+    /**
      * Composite types value
      * @param object $value composite type instance
      * @return string sub-query value for composite type
