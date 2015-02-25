@@ -11,6 +11,7 @@ final class PredisFactory {
     /**
      * Create Predis instance by array config
      * @param array $config configuration array
+     * @return Client predis instance
      */
     public static function createPredisByConfig(array $config) {
         return new Client($config);
