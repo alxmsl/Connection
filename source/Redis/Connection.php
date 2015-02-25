@@ -745,7 +745,7 @@ final class Connection extends AbstractConnection implements RedisInterface {
      */
     public function transaction(Closure $Commands, $mode = Redis::MULTI) {
         try {
-            $Instance = $this->getRedis()->multi($mode);
+            $Instance = $this->multi($mode);
             $result = $Commands($Instance);
             if ($result == true) {
                 return $Instance->exec();
@@ -779,6 +779,17 @@ final class Connection extends AbstractConnection implements RedisInterface {
     public function select($database) {
         try {
             return $this->getRedis()->select($database);
+        } catch (RedisException $ex) {
+            throw new ConnectException();
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function multi($mode = Redis::MULTI) {
+        try {
+            return $this->getRedis()->multi($mode);
         } catch (RedisException $ex) {
             throw new ConnectException();
         }

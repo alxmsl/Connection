@@ -1,7 +1,7 @@
 {
     "name": "alxmsl/connection",
     "description": "Simple library for support storage connections",
-    "keywords": ["redis", "postgres", "PostgreSQL"],
+    "keywords": ["redis", "postgres", "PostgreSQL", "predis", "phpredis"],
     "license": "WTFPL",
     "authors": [
         {
@@ -15,5 +15,8 @@
     },
     "autoload": {
         "psr-4": {"alxmsl\\Connection\\": "source/"}
+    },
+    "require":{
+        "predis/predis": "1.0.*"
     }
 }

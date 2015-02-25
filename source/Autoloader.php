@@ -59,6 +59,8 @@ final class Autoloader {
         'alxmsl\\Connection\\Postgresql\\Connection'    => 'Postgresql/Connection.php',
         'alxmsl\\Connection\\Postgresql\\QueryResult'   => 'Postgresql/QueryResult.php',
         'alxmsl\\Connection\\Postgresql\\QueryTemplate' => 'Postgresql/QueryTemplate.php',
+
+        'alxmsl\\Connection\\Predis\\PredisFactory' => 'Predis/PredisFactory.php',
     );
 
     /**

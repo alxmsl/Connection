@@ -8,6 +8,7 @@
  */
 
 namespace alxmsl\Connection\Redis;
+use InvalidArgumentException;
 
 /**
  * Factory for simple PhpRedis instance creation
@@ -18,7 +19,7 @@ final class RedisFactory {
     /**
      * Create PhpRedis instance by array config
      * @param array $config array configuration
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function createRedisByConfig(array $config) {
         $Redis = new Connection();

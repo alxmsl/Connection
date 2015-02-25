@@ -352,7 +352,7 @@ interface RedisInterface {
      * Execute transaction method
      * @param callable $Commands function, that have Redis instance as a first argument.
      * Must returns boolean value for execute or discard all commands
-     * @param string $mode transaction mode
+     * @param int $mode transaction mode
      * @return bool transaction execution result
      */
     public function transaction(Closure $Commands, $mode = Redis::MULTI);
@@ -370,4 +370,12 @@ interface RedisInterface {
      * @return bool selection result
      */
     public function select($database);
+
+    /**
+     * Start transaction
+     * @param int $mode transaction mode: Redis::MULTI or Redis::PIPELINE
+     * @return Redis current instance
+     * @throws ConnectException when redis instance unavailable
+     */
+    public function multi($mode);
 }

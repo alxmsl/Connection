@@ -3,9 +3,26 @@ Connection
 Simple set of classes for support some connections. At this moment library supports:
 
 * redis connection over [phpredis](https://github.com/nicolasff/phpredis)
+* redis connection over [predis](https://github.com/nrk/predis)
 * [postgresql](http://php.net/manual/en/intro.pgsql.php) connection
 
-Redis usage example
+Predis usage example
+-------
+
+    use alxmsl\Connection\Predis\PredisFactory;
+    
+    // Create Redis Client instance with you configuration settings
+    $Redis = PredisFactory::createPredisByConfig(array(
+        'host' => 'localhost',
+        'port' => 6379,
+    ));
+    
+    // Use Redis commands
+    $Redis->set('test', '7');
+    var_dump($Redis->get('test'));
+
+
+Redis usage example (phpredis)
 -------
 
     use alxmsl\Connection\Redis\RedisFactory;
