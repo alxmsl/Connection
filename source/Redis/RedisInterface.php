@@ -378,4 +378,11 @@ interface RedisInterface {
      * @throws ConnectException when redis instance unavailable
      */
     public function multi($mode);
+
+    /**
+     * Watch the key
+     * @param string $key watched key
+     * @throws ConnectException when redis instance unavailable
+     */
+    public function watch($key);
 }

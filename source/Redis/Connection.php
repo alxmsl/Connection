@@ -794,4 +794,15 @@ final class Connection extends AbstractConnection implements RedisInterface {
             throw new ConnectException();
         }
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function watch($key) {
+        try {
+            $this->getRedis()->watch($key);
+        } catch (RedisException $ex) {
+            throw new ConnectException();
+        }
+    }
 }
