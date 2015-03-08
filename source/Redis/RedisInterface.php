@@ -382,6 +382,7 @@ interface RedisInterface {
     /**
      * Watch the key
      * @param string $key watched key
+     * @return bool watching result
      * @throws ConnectException when redis instance unavailable
      */
     public function watch($key);
