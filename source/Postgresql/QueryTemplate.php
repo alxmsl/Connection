@@ -36,6 +36,15 @@ final class QueryTemplate extends DbTemplate {
     }
 
     /**
+     * Escape float value
+     * @param mixed $value query value
+     * @return float query value as a float
+     */
+    public function float($value) {
+        return (float) $value;
+    }
+
+    /**
      * Escape boolean value
      * @param mixed $value query value
      * @return string query value as an boolean
