@@ -54,14 +54,14 @@ Postgres usage example
     $Connection->connect();
 
     // ..query needed data
-    $Result = $Connection->query('select * from "pg_class"', null, false);
+    $Result = $Connection->query('select * from "pg_class"', null);
     $Data = $Result->getResult();
     var_dump($Data[0]);
 
     // ..query data with parameters
     $Result = $Connection->query('select count(*) from {{ tbl(table) }}', array(
         'table' => 'pg_class',
-    ), false);
+    ));
     $Data = $Result->getResult();
     var_dump($Data);
 
