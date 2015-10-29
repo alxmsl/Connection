@@ -8,6 +8,7 @@
  */
 
 namespace alxmsl\Connection\Postgresql;
+
 use alxmsl\Connection\Query\DbTemplate;
 use Serializable;
 
@@ -17,6 +18,10 @@ use Serializable;
  * @date 4/6/13
  */
 final class QueryTemplate extends DbTemplate {
+    public function json($value) {
+        return $this->str(json_encode($value, JSON_UNESCAPED_UNICODE));
+    }
+
     /**
      * Escape string parameters
      * @param mixed $value value
