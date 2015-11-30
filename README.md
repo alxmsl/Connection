@@ -1,5 +1,9 @@
 # Connection
 
+[![License](https://poser.pugx.org/alxmsl/connection/license)](https://packagist.org/packages/alxmsl/connection)
+[![Latest Stable Version](https://poser.pugx.org/alxmsl/connection/version)](https://packagist.org/packages/alxmsl/connection)
+[![Total Downloads](https://poser.pugx.org/alxmsl/connection/downloads)](https://packagist.org/packages/alxmsl/connection)
+
 Simple set of classes for support some connections. At this moment library supports:
 
 * redis connection over [phpredis](https://github.com/nicolasff/phpredis)
