@@ -1,13 +1,16 @@
-Connection
-=============
+# Connection
+
+[![License](https://poser.pugx.org/alxmsl/connection/license)](https://packagist.org/packages/alxmsl/connection)
+[![Latest Stable Version](https://poser.pugx.org/alxmsl/connection/version)](https://packagist.org/packages/alxmsl/connection)
+[![Total Downloads](https://poser.pugx.org/alxmsl/connection/downloads)](https://packagist.org/packages/alxmsl/connection)
+
 Simple set of classes for support some connections. At this moment library supports:
 
 * redis connection over [phpredis](https://github.com/nicolasff/phpredis)
 * redis connection over [predis](https://github.com/nrk/predis)
 * [postgresql](http://php.net/manual/en/intro.pgsql.php) connection
 
-Predis usage example
--------
+## Predis usage example
 
     use alxmsl\Connection\Predis\PredisFactory;
     
@@ -22,8 +25,7 @@ Predis usage example
     var_dump($Redis->get('test'));
 
 
-Redis usage example (phpredis)
--------
+## Redis usage example (phpredis)
 
     use alxmsl\Connection\Redis\RedisFactory;
 
@@ -37,8 +39,7 @@ Redis usage example (phpredis)
     $Redis->set('test', '7');
     var_dump($Redis->get('test'));
 
-Postgres usage example
--------
+## Postgres usage example
 
     use alxmsl\Connection\Postgresql\Connection;
 
@@ -65,9 +66,18 @@ Postgres usage example
     $Data = $Result->getResult();
     var_dump($Data);
 
-License
--------
-Copyright © 2014 Alexey Maslov <alexey.y.maslov@gmail.com>
-This work is free. You can redistribute it and/or modify it under the
-terms of the Do What The Fuck You Want To Public License, Version 2,
-as published by Sam Hocevar. See the COPYING file for more details.
+## License
+
+Copyright 2015 Alexey Maslov <alexey.y.maslov@gmail.com>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
