@@ -2,7 +2,7 @@
     "name": "alxmsl/connection",
     "description": "Simple library for support storage connections",
     "keywords": ["redis", "postgres", "PostgreSQL", "predis", "phpredis"],
-    "license": "WTFPL",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "alxmsl",
