@@ -87,4 +87,47 @@ final class QueryTemplate extends DbTemplate {
         return pg_escape_identifier((string) $table);
     }
 
+    /**
+     * Escape string[] values
+     * @param array $array
+     * @return string
+     */
+    public function arrstr(array $array) {
+        $array = array_map(function($value) {
+            return pg_escape_identifier((string) $value);
+        }, $array);
+        return $this->str(sprintf('{%s}', implode(',', $array)));
+    }
+
+    /**
+     * Escape int[] values
+     * @param array $array
+     * @return string
+     */
+    public function arrint(array $array) {
+        $array = array_map('intval', $array);
+        return $this->str(sprintf('{%s}', implode(',', $array)));
+    }
+
+    /**
+     * Escape integers array
+     * @param array $array
+     * @return string
+     */
+    public function inint(array $array) {
+        $array = array_map('intval', $array);
+        return sprintf('(%s)', implode(',', $array));
+    }
+
+    /**
+     * Escape strings array
+     * @param array $array
+     * @return string
+     */
+    public function instr(array $array) {
+        $array = array_map(function ($value) {
+            return pg_escape_literal((string) $value);
+        }, $array);
+        return sprintf('(%s)', implode(',', $array));
+    }
 }
