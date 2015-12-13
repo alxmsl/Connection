@@ -179,7 +179,12 @@ final class Connection extends DbConnection {
                     case self::CODE_DUPLICATE_TYPE:
                         throw new DuplicateTypeException($errorMessage);
                     default:
-                        throw new QueryException($errorMessage . ':' . $query, $errorCode);
+                        throw new QueryException(sprintf(
+                            "%s QUERY: %s CODE: %s",
+                            $errorMessage,
+                            $query,
+                            $errorCode
+                        ));
                 }
             } else {
                 return new QueryResult($Result);

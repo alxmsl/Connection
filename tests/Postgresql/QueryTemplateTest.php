@@ -1,6 +1,6 @@
 <?php
 
-namespace alxmsl\Connection\Tests;
+namespace alxmsl\Connection\Tests\Postgresql;
 
 use alxmsl\Connection\Postgresql\QueryTemplate;
 use PHPUnit_Framework_Error_Warning;
