@@ -23,6 +23,7 @@ use alxmsl\Connection\Postgresql\Exception\DuplicateEntryException;
 use alxmsl\Connection\Postgresql\Exception\DuplicateTableException;
 use alxmsl\Connection\Postgresql\Exception\DuplicateTypeException;
 use alxmsl\Connection\Postgresql\Exception\QueryException;
+use alxmsl\Connection\Postgresql\Exception\RaiseException;
 use alxmsl\Connection\Postgresql\Exception\TriesOverConnectException;
 use alxmsl\Connection\Postgresql\Exception\UndefinedTableException;
 
@@ -37,7 +38,8 @@ final class Connection extends DbConnection {
     const CODE_DUPLICATE_ENTRY = '23505',
           CODE_UNDEFINED_TABLE = '42P01',
           CODE_DUPLICATE_TABLE = '42P07',
-          CODE_DUPLICATE_TYPE  = '42710';
+          CODE_DUPLICATE_TYPE  = '42710',
+          CODE_RAISE_EXCEPTION = 'P0001';
 
     /**
      * Postgres queries
@@ -178,8 +180,15 @@ final class Connection extends DbConnection {
                         throw new DuplicateTableException($errorMessage);
                     case self::CODE_DUPLICATE_TYPE:
                         throw new DuplicateTypeException($errorMessage);
+                    case self::CODE_RAISE_EXCEPTION:
+                        throw new RaiseException($errorMessage);
                     default:
-                        throw new QueryException($errorMessage . ':' . $query, $errorCode);
+                        throw new QueryException(sprintf(
+                            "%s QUERY: %s CODE: %s",
+                            $errorMessage,
+                            $query,
+                            $errorCode
+                        ));
                 }
             } else {
                 return new QueryResult($Result);
