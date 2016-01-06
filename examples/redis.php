@@ -19,7 +19,7 @@
  */
 
 // Firstly include base class
-include('../source/Autoloader.php');
+include '../vendor/autoload.php';
 
 use alxmsl\Connection\Redis\RedisFactory;
 
