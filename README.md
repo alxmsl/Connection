@@ -66,6 +66,12 @@ Simple set of classes for support some connections. At this moment library suppo
     $Data = $Result->getResult();
     var_dump($Data);
 
+## Contributing
+
+I welcome any help in developing this project. I accept contributions as pull requests. Finally, I kindly ask that 
+ you add your tests and document all changes in library behavior/corrections. You are welcome to add copyright notices 
+ with your name/nickname and email in all files, that you change
+
 ## License
 
 Copyright 2015 Alexey Maslov <alexey.y.maslov@gmail.com>
