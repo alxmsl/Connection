@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2015 Alexey Maslov <alexey.y.maslov@gmail.com>
+ * Copyright 2015-2016 Alexey Maslov <alexey.y.maslov@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
  */
 
 // Firstly include base class
-include('../source/Autoloader.php');
+include '../vendor/autoload.php';
 
 use alxmsl\Connection\Postgresql\Connection;
 
