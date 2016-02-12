@@ -33,6 +33,7 @@ final class RedisFactory {
         $Redis = new Connection();
         $Redis->setHost(@$config['host'])
             ->setPort(@$config['port']);
+        (isset($config['persistent']))      && $Redis->setPersistent($config['persistent']);
         (isset($config['connect_timeout'])) && $Redis->setConnectTimeout($config['connect_timeout']);
         (isset($config['connect_tries']))   && $Redis->setConnectTries($config['connect_tries']);
         return $Redis;
